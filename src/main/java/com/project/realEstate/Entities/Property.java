@@ -27,7 +27,7 @@ public class Property {
     public Property() {
     }
 
-    public Property(String title, int price, Picture picture, String description, int room, int wc, int parking, LocalDateTime created, Seller seller) {
+    public Property(String title, int price, Picture picture, String description, int room, int wc, int parking, LocalDateTime created/*, Seller seller*/) {
         this.title = title;
         this.price = price;
         this.picture = picture;
@@ -36,7 +36,7 @@ public class Property {
         this.wc = wc;
         this.parking = parking;
         this.created = created;
-        this.seller = seller;
+//        this.seller = seller;
     }
 
     public Long getId() {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class PropertyService {
@@ -18,7 +19,7 @@ public class PropertyService {
 
 
 
-    public void validate(String title, int price, Picture picture, String description, int room, int wc, int parking, Seller seller){
+    public void validate(String title, int price, Picture picture, String description, int room, int wc, int parking/*, Seller seller*/){
 
         if (title.isEmpty()){
             throw new IllegalStateException("Tittle can't be empty");
@@ -38,12 +39,12 @@ public class PropertyService {
         if(parking <0 || parking > 20){
             throw new IllegalStateException("parking can't be less than cero or grater than 20");
         }
-        if(seller.equals(null)){
-            throw new IllegalStateException("Seller cant be null");
-        }
-        if (picture.equals(null)){
-            throw new IllegalStateException("Photo can't be null");
-        }
+//        if(seller.equals(null)){
+//            throw new IllegalStateException("Seller cant be null");
+//        }
+//        if (picture.equals(null)){
+//            throw new IllegalStateException("Photo can't be null");
+//        }
 
     }
 
@@ -51,18 +52,19 @@ public class PropertyService {
     public void createProperty(Property property){
 
         validate(property.getTitle(), property.getPrice(), property.getPicture(), property.getDescription(),
-                property.getRoom(), property.getWc(), property.getParking(), property.getSeller());
+                property.getRoom(), property.getWc(), property.getParking()/*, property.getSeller()*/);
 
         Property property1 = new Property(
                 property.getTitle(), property.getPrice(), property.getPicture(), property.getDescription(), property.getRoom(), property.getWc(),
-                property.getParking(), LocalDateTime.now(), property.getSeller()
-        );
+                property.getParking(), LocalDateTime.now());
 
         propertyRepository.save(property1);
 
+    }
 
+    public List<Property> showAll(){
 
-
+        return propertyRepository.findAll();
     }
 
 }
